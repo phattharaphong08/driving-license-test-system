@@ -2,8 +2,10 @@
 
 
 export const calculateFinal = (data) => {
-    // console.log(data)
-    if (!data.resultPhysicalTest || !data.resultTheoryTest || !data.practiceExamResult) {
+    // console.log(data.resultTheoryTest.billBoard)
+    if (!data.resultPhysicalTest || data.resultPhysicalTest === "รอพิจารณา" || 
+        !data.resultTheoryTest || data.resultTheoryTest === "รอพิจารณา" ||
+        !data.practiceExamResult) {
         return "รอพิจารณา";
     };
 

@@ -9,7 +9,7 @@ import { InputRadio } from "../ui/InputRadio";
 
 export const DrivingTestResultForm = ({ methods }) => {
 
-    const { register, watch, formState: { errors } } = methods;
+    const { register, watch, setValue, formState: { errors } } = methods;
 
     const physicalTest = watch("physicalTest") || {};
     const theoryTest = watch("theoryTest") || {};
@@ -31,41 +31,99 @@ export const DrivingTestResultForm = ({ methods }) => {
                     </div>
                 </div>
                 <div>
-                    <div className="flex gap-4">
-                        <label className="block mb-1 font-medium">
-                            ตาบอดสี
-                        </label>
-                        <InputRadio {...register("physicalTest.colorBlind")} label={"ผ่าน"} value={"ผ่าน"} />
-                        <InputRadio {...register("physicalTest.colorBlind")} label={"ไม่ผ่าน"} value={"ไม่ผ่าน"} />
-                    </div>
-                    <div className="flex gap-4">
-                        <label className="block mb-1 font-medium">
-                            สายตายาว
-                        </label>
-                        <InputRadio {...register("physicalTest.longSight")} label={"ผ่าน"} value={"ผ่าน"} />
-                        <InputRadio {...register("physicalTest.longSight")} label={"ไม่ผ่าน"} value={"ไม่ผ่าน"} />
-                    </div>
-                    <div className="flex gap-4">
-                        <label className="block mb-1 font-medium">
-                            สายตาเอียง
-                        </label>
-                        <InputRadio {...register("physicalTest.astigmatism")} label={"ผ่าน"} value={"ผ่าน"} />
-                        <InputRadio {...register("physicalTest.astigmatism")} label={"ไม่ผ่าน"} value={"ไม่ผ่าน"} />
-                    </div>
-                    <div className="flex gap-4">
-                        <label className="block mb-1 font-medium">
-                            การตอบสนองร่างกาย
-                        </label>
-                        <InputRadio {...register("physicalTest.reactionTest")} label={"ผ่าน"} value={"ผ่าน"} />
-                        <InputRadio {...register("physicalTest.reactionTest")} label={"ไม่ผ่าน"} value={"ไม่ผ่าน"} />
+                    <div className="flex gap-8 items-center">
+                        <div>
+                            <div className="flex gap-4">
+                                <label className="block mb-1 font-medium">
+                                    ตาบอดสี
+                                </label>
+                                <InputRadio {...register("physicalTest.colorBlind")} label={"ผ่าน"} value={"ผ่าน"}
+                                    onClick={() => {
+                                        if (watch("physicalTest.colorBlind") === "ผ่าน") {
+                                            setValue("physicalTest.colorBlind", "");
+                                        }
+                                    }}
+                                />
+                                <InputRadio {...register("physicalTest.colorBlind")} label={"ไม่ผ่าน"} value={"ไม่ผ่าน"}
+                                    onClick={() => {
+                                        if (watch("physicalTest.colorBlind") === "ไม่ผ่าน") {
+                                            setValue("physicalTest.colorBlind", "");
+                                        }
+                                    }}
+                                />
+                            </div>
+                            <div className="flex gap-4">
+                                <label className="block mb-1 font-medium">
+                                    สายตายาว
+                                </label>
+                                <InputRadio {...register("physicalTest.longSight")} label={"ผ่าน"} value={"ผ่าน"}
+                                    onClick={() => {
+                                        if (watch("physicalTest.longSight") === "ผ่าน") {
+                                            setValue("physicalTest.longSight", "");
+                                        }
+                                    }}
+                                />
+                                <InputRadio {...register("physicalTest.longSight")} label={"ไม่ผ่าน"} value={"ไม่ผ่าน"}
+                                    onClick={() => {
+                                        if (watch("physicalTest.longSight") === "ไม่ผ่าน") {
+                                            setValue("physicalTest.longSight", "");
+                                        }
+                                    }}
+                                />
+                            </div>
+                        </div>
+                        <div>
+                            <div className="flex gap-4">
+                                <label className="block mb-1 font-medium">
+                                    สายตาเอียง
+                                </label>
+                                <InputRadio {...register("physicalTest.astigmatism")} label={"ผ่าน"} value={"ผ่าน"}
+                                    onClick={() => {
+                                        if (watch("physicalTest.astigmatism") === "ผ่าน") {
+                                            setValue("physicalTest.astigmatism", "");
+                                        }
+                                    }}
+                                />
+                                <InputRadio {...register("physicalTest.astigmatism")} label={"ไม่ผ่าน"} value={"ไม่ผ่าน"}
+                                    onClick={() => {
+                                        if (watch("physicalTest.astigmatism") === "ไม่ผ่าน") {
+                                            setValue("physicalTest.astigmatism", "");
+                                        }
+                                    }}
+                                />
+                            </div>
+                            <div className="flex gap-4">
+                                <label className="block mb-1 font-medium">
+                                    การตอบสนองร่างกาย
+                                </label>
+                                <InputRadio {...register("physicalTest.reactionTest")} label={"ผ่าน"} value={"ผ่าน"}
+                                    onClick={() => {
+                                        if (watch("physicalTest.reactionTest") === "ผ่าน") {
+                                            setValue("physicalTest.reactionTest", "");
+                                        }
+                                    }}
+                                />
+                                <InputRadio {...register("physicalTest.reactionTest")} label={"ไม่ผ่าน"} value={"ไม่ผ่าน"}
+                                    onClick={() => {
+                                        if (watch("physicalTest.reactionTest") === "ไม่ผ่าน") {
+                                            setValue("physicalTest.reactionTest", "");
+                                        }
+                                    }}
+                                />
+                            </div>
+                        </div>
                     </div>
                     <div>
-                        ผลการทดสอบ:
-                        <span className={
-                            resultPhysicalTest === "ผ่าน"
-                                ? "text-green-600"
-                                : "text-red-600"
-                        }>
+                        ผลการทดสอบ: 
+                        <span
+                            className={
+                                resultPhysicalTest === "ผ่าน"
+                                    ? "text-green-600"
+                                    : resultPhysicalTest === "ไม่ผ่าน"
+                                        ? "text-red-600"
+                                        : "text-yellow-600"
+                            }
+                        >
                             {resultPhysicalTest}
                         </span>
                     </div>
@@ -130,8 +188,20 @@ export const DrivingTestResultForm = ({ methods }) => {
                     <label>
                         การสอบปฏิบัติ
                     </label>
-                    <InputRadio {...register("practiceExam")} label={"ผ่าน"} value={"ผ่าน"} />
-                    <InputRadio {...register("practiceExam")} label={"ไม่ผ่าน"} value={"ไม่ผ่าน"} />
+                    <InputRadio {...register("practiceExam")} label={"ผ่าน"} value={"ผ่าน"}
+                        onClick={() => {
+                            if (watch("practiceExam") === "ผ่าน") {
+                                setValue("practiceExam", "");
+                            }
+                        }}
+                    />
+                    <InputRadio {...register("practiceExam")} label={"ไม่ผ่าน"} value={"ไม่ผ่าน"}
+                        onClick={() => {
+                            if (watch("practiceExam") === "ไม่ผ่าน") {
+                                setValue("practiceExam", "");
+                            }
+                        }}
+                    />
                 </div>
                 <div>
                     สรุปผลการทดสอบทั้งหมด:

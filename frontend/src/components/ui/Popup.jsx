@@ -18,7 +18,9 @@ export const Popup = ({ header, isOpen, onClose, height, width, disabled, submit
             }}
         >
             <div className="flex items-center justify-between border-b pb-2">
-                <h1 className="text-[20px] font-semibold items-center">{header}</h1>
+                <h1 className="flex items-center text-[20px] font-semibold">
+                    {header}
+                </h1>
                 <div className="w-[36px] h-[44px] items-center">
                     <Button onClick={onClose} variant={"end"}>
                         X

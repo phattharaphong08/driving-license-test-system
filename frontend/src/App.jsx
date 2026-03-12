@@ -10,7 +10,7 @@ import { useForm } from 'react-hook-form';
 function App() {
 
   const [openForm, setOpenForm] = useState(false);
-  
+
 
   const methodsForm = useForm({
     defaultValues: {
@@ -33,16 +33,23 @@ function App() {
   });
 
   return (
-    <>
-      <div className=''>
-        <Button
-          onClick={() => setOpenForm(true)}
-        >
-          บันทึกข้อมูล
-        </Button>
+    <div className="min-h-screen flex flex-col items-center justify-starts gap-6 p-18">
+      <div className="w-180">
+        <div className=" w-full flex items-center justify-between mb-6 border-b pb-3">
+          <h2 className="text-xl font-semibold text-gray-800">
+            โปรเเกรมบันทึกผู้สมัครใบขับขี่
+          </h2>
+          <div>
+            <Button
+              onClick={() => setOpenForm(true)}
+            >
+              บันทึกข้อมูล
+            </Button>
+          </div>
+        </div>
         <Popup
           isOpen={openForm}
-          onClose={() => {setOpenForm(false); methodsForm.reset()}}
+          onClose={() => { setOpenForm(false); methodsForm.reset() }}
           header={"Form บันทึกข้อมูลผู้ทำใบขับขี้"}
           height={"720px"}
           width={"780px"}
@@ -52,10 +59,10 @@ function App() {
           <DrivingTestResultForm methods={methodsForm} />
         </Popup>
       </div>
-      <div>
+      <div className="w-180">
         <Home />
       </div>
-    </>
+    </div>
   )
 }
 
