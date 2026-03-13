@@ -1,0 +1,27 @@
+import express from "express";
+import cors from "cors";
+import dotenv from "dotenv";
+
+import routerDriving from "./routes/drivingLicense.route.js";
+
+import { connectDB } from "./configs/db.js"; 
+
+dotenv.config();
+
+const app = express();
+
+app.use(cors());
+app.use(express.json());
+
+// test
+app.get("/", (req, res) => {
+    res.json({ message: "Backend is run!" })
+});
+
+app.use("/api", routerDriving);
+
+connectDB();
+
+app.listen(5008, () => {
+    console.log("Server running on port 5008");
+});

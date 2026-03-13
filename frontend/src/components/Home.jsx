@@ -1,12 +1,25 @@
-import { useForm } from "react-hook-form"
-import { Input } from "./ui/Input"
+import { useForm } from "react-hook-form";
+import { Input } from "./ui/Input";
 
 
 
 
-export const Home = () => {
+export const Home = ({ dataAll, selectEditId, selectDelete }) => {
 
     const { register } = useForm();
+
+    const getResultColor = (result) => {
+        switch (result) {
+            case "ผ่านการทดสอบ":
+                return "bg-green-100 text-green-700";
+            case "ไม่ผ่านการทดสอบ":
+                return "bg-red-100 text-red-700";
+            case "รอพิจารณา":
+                return "bg-yellow-100 text-yellow-700";
+            default:
+                return "bg-gray-100 text-gray-700";
+        };
+    };
 
     return (
         <div className="w-full max-w-5xl mx-auto p-6">
@@ -51,37 +64,49 @@ export const Home = () => {
                     </thead>
 
                     <tbody className="divide-y">
+                        {dataAll.map((item) => {
+                            const { id, exam_time, name, result, created_at } = item;
 
-                        <tr className="hover:bg-gray-50 transition">
-                            <td className="px-4 py-3">1</td>
+                            return (
+                                <tr key={id} className="hover:bg-gray-50 transition">
 
-                            <td className="px-4 py-3">
-                                สมชาย ใจดี
-                            </td>
+                                    <td className="px-4 py-3">{exam_time}</td>
 
-                            <td className="px-4 py-3 text-center">
-                                <span className="px-3 py-1 text-xs font-medium rounded-full bg-green-100 text-green-700">
-                                    ผ่านการทดสอบ
-                                </span>
-                            </td>
+                                    <td className="px-4 py-3">
+                                        {name}
+                                    </td>
 
-                            <td className="px-4 py-3 text-center">
-                                12/03/2026
-                            </td>
+                                    <td className="px-4 py-3 text-center">
+                                        <span
+                                            className={`px-3 py-1 text-xs font-medium rounded-full ${getResultColor(result)}`}
+                                        >
+                                            {result}
+                                        </span>
+                                    </td>
 
-                            <td className="px-4 py-3 text-center">
-                                <button className="px-3 py-1 text-sm text-white bg-blue-500 rounded hover:bg-blue-600">
-                                    แก้ไข
-                                </button>
-                            </td>
+                                    <td className="px-4 py-3 text-center">
+                                        {created_at}
+                                    </td>
 
-                            <td className="px-4 py-3 text-center">
-                                <button className="px-3 py-1 text-sm text-white bg-red-500 rounded hover:bg-red-600">
-                                    ลบ
-                                </button>
-                            </td>
+                                    <td className="px-4 py-3 text-center">
+                                        <button className="px-3 py-1 text-sm text-white bg-blue-500 rounded hover:bg-blue-600"
+                                            onClick={() => selectEditId(id)}
+                                        >
+                                            แก้ไข
+                                        </button>
+                                    </td>
 
-                        </tr>
+                                    <td className="px-4 py-3 text-center">
+                                        <button className="px-3 py-1 text-sm text-white bg-red-500 rounded hover:bg-red-600"
+                                            onClickCapture={() => selectDelete(id)}
+                                        >
+                                            ลบ
+                                        </button>
+                                    </td>
+
+                                </tr>
+                            );
+                        })}
 
                     </tbody>
 
